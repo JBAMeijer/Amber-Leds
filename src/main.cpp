@@ -2,26 +2,35 @@
 
 //----Leds---------------------------------------
 
-#define RIGHTLEDS 4
-#define MIDDLELEDS 5
-#define LEFTLEDS 6
+#define RIGHTLEDS  0
+#define MIDDLELEDS 1
+#define LEFTLEDS   2
+
+#define RIGHTGREENBUTTONLED  4
+#define LEFTGREENBUTTONLED   5
+#define RIGHTYELLOWBUTTONLED 6
+#define LEFTYELLOWBUTTONLED  7
+#define RIGHTWHITEBUTTONLED  8
+#define LEFTWHITEBUTTONLED   9
+#define RIGHTBLUEBUTTONLED   10
+#define LEFTBLUEBUTTONLED    11
 
 //-----------------------------------------------
 //----Buttons------------------------------------
 
-#define RIGHTGREENBUTTON    23
-#define LEFTGREENBUTTON     22
-#define RIGHTYELLOWBUTTON   21
-#define LEFTYELLOWBUTTON    20
-#define RIGHTWHITEBUTTON    19
-#define LEFTWHITEBUTTON     18
-#define RIGHTBLUEBUTTON     17
-#define LEFTBLUEBUTTON      16
+#define RIGHTGREENBUTTON  23
+#define LEFTGREENBUTTON   22
+#define RIGHTYELLOWBUTTON 21
+#define LEFTYELLOWBUTTON  20
+#define RIGHTWHITEBUTTON  19
+#define LEFTWHITEBUTTON   18
+#define RIGHTBLUEBUTTON   17
+#define LEFTBLUEBUTTON    16
 
 //-----------------------------------------------
 
 int right_green_button_val = 0;
-int left_green_button_val = 0;
+int left_green_button_val   = 0;
 int right_yellow_button_val = 0;
 int left_yellow_button_val = 0;
 int right_white_button_val = 0;
@@ -34,6 +43,15 @@ void setup() {
   pinMode(RIGHTLEDS, OUTPUT);
   pinMode(MIDDLELEDS, OUTPUT);
   pinMode(LEFTLEDS, OUTPUT);
+
+  pinMode(RIGHTGREENBUTTONLED, OUTPUT);
+  pinMode(LEFTGREENBUTTONLED, OUTPUT);
+  pinMode(RIGHTYELLOWBUTTONLED, OUTPUT);
+  pinMode(LEFTYELLOWBUTTONLED, OUTPUT);
+  pinMode(RIGHTWHITEBUTTONLED, OUTPUT);
+  pinMode(LEFTWHITEBUTTONLED, OUTPUT);
+  pinMode(RIGHTBLUEBUTTONLED, OUTPUT);
+  pinMode(LEFTBLUEBUTTONLED, OUTPUT);
 
   pinMode(RIGHTGREENBUTTON, INPUT_PULLUP);
   pinMode(LEFTGREENBUTTON, INPUT_PULLUP);
@@ -48,7 +66,17 @@ void setup() {
   digitalWrite(MIDDLELEDS, LOW);
   digitalWrite(RIGHTLEDS, LOW);
 
-  delay(1000); // Sanity check
+  digitalWrite(RIGHTGREENBUTTONLED, LOW);
+  digitalWrite(LEFTGREENBUTTONLED, LOW);
+  digitalWrite(RIGHTYELLOWBUTTONLED, LOW);
+  digitalWrite(LEFTYELLOWBUTTONLED, LOW);
+  digitalWrite(RIGHTWHITEBUTTONLED, LOW);
+  digitalWrite(LEFTWHITEBUTTONLED, LOW);
+  digitalWrite(RIGHTBLUEBUTTONLED, LOW);
+  digitalWrite(LEFTBLUEBUTTONLED, LOW);
+
+  delay(2000); // Sanity check
+  Serial.print("Setup complete!");
 }
 
 void loop() {
@@ -71,18 +99,27 @@ void loop() {
   right_blue_button_val   = digitalRead(RIGHTBLUEBUTTON);
   left_blue_button_val    = digitalRead(LEFTBLUEBUTTON);
 
-  String string = "right_green_button:  " + String(right_green_button_val, DEC)  + '\n'
-                + "left_green_button:   " + String(left_green_button_val, DEC)   + '\n'
-                + "right_yellow_button: " + String(right_yellow_button_val, DEC) + '\n'
-                + "left_yellow_button:  " + String(left_yellow_button_val, DEC)  + '\n'
-                + "right_white_button:  " + String(right_white_button_val, DEC)  + '\n'
-                + "left_white_button:   " + String(left_white_button_val, DEC)   + '\n'
-                + "right_blue_button:   " + String(right_blue_button_val, DEC)   + '\n'
-                + "left_blue_button:    " + String(left_blue_button_val, DEC)    + '\n';
+  digitalWrite(RIGHTGREENBUTTONLED, !right_green_button_val);
+  digitalWrite(LEFTGREENBUTTONLED, !left_green_button_val);
+  digitalWrite(RIGHTYELLOWBUTTONLED, !right_yellow_button_val);
+  digitalWrite(LEFTYELLOWBUTTONLED, !left_yellow_button_val);
+  digitalWrite(RIGHTWHITEBUTTONLED, !right_white_button_val);
+  digitalWrite(LEFTWHITEBUTTONLED, !left_white_button_val);
+  digitalWrite(RIGHTBLUEBUTTONLED, !right_blue_button_val);
+  digitalWrite(LEFTBLUEBUTTONLED, !left_blue_button_val);
+
+  // String string = "right_green_button:  " + String(right_green_button_val, DEC)  + '\n'
+  //               + "left_green_button:   " + String(left_green_button_val, DEC)   + '\n'
+  //               + "right_yellow_button: " + String(right_yellow_button_val, DEC) + '\n'
+  //               + "left_yellow_button:  " + String(left_yellow_button_val, DEC)  + '\n'
+  //               + "right_white_button:  " + String(right_white_button_val, DEC)  + '\n'
+  //               + "left_white_button:   " + String(left_white_button_val, DEC)   + '\n'
+  //               + "right_blue_button:   " + String(right_blue_button_val, DEC)   + '\n'
+  //               + "left_blue_button:    " + String(left_blue_button_val, DEC)    + '\n';
   
-  Serial.print(string);
-  Serial.println();
-  Serial.println("---------------------------------------");
-  Serial.println();
-  delay(1000);
+  // Serial.print(string);
+  // Serial.println();
+  // Serial.println("---------------------------------------");
+  // Serial.println();
+  delay(50);
 }
